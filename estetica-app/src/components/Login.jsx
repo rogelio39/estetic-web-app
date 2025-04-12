@@ -1,17 +1,22 @@
 import React, { useEffect } from 'react';
 import { auth, googleProvider } from '../firebase';
-import { signInWithRedirect } from 'firebase/auth';
+import { signInWithRedirect, getRedirectResult } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const navigate = useNavigate();
 
-    // Verifica si el usuario ya está autenticado cuando se carga el componente
     useEffect(() => {
-        if (auth.currentUser) {
-            // Si el usuario ya está autenticado, redirige automáticamente
-            navigate('/');
-        }
+        const checkRedirectResult = async () => {
+            const result = await getRedirectResult(auth);
+            if (result) {
+                // El usuario ha sido autenticado con éxito
+                localStorage.setItem('user', result.user.displayName);
+                // Redirige al inicio después de un login exitoso
+                navigate('/');
+            }
+        };
+        checkRedirectResult();
     }, [navigate]);
 
     const login = async () => {
