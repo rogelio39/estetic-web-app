@@ -8,9 +8,9 @@ const Login = () => {
         try {
             const result = await signInWithPopup(auth, googleProvider);
             if (result) {
+                localStorage.setItem('user', result.user.displayName)
                 navigate('/')
             }
-            localStorage.setItem('user', result.user.displayName)
         } catch (err) {
             console.error(err);
         }
