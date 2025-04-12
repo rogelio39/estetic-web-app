@@ -3,13 +3,12 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import Turno from './models/Turno.js';
-import path from 'path';
-import { fileURLToPath } from 'url';
+
 
 dotenv.config();
 
 const corsOptions = {
-    origin: 'https://estetic-web-app.onrender.com',
+    origin : 'https://estetic-web-app.onrender.com',
     method: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }
@@ -17,17 +16,6 @@ const corsOptions = {
 const app = express();
 app.use(cors(corsOptions));
 app.use(express.json());
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// 1. Servir archivos estáticos del frontend (ajustá la ruta si usás Vite)
-app.use(express.static(path.join(__dirname, 'client', 'dist')));
-
-// 2. Ruta catch-all: para cualquier GET que no sea de la API, devolvés index.html
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
-});
 
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
