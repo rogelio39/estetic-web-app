@@ -1,12 +1,12 @@
 import React from 'react';
 import { auth, googleProvider } from '../firebase';
-import { signInWithPopup } from 'firebase/auth';
+import { signInWithRedirect } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 const Login = () => {
     const navigate = useNavigate()
     const login = async () => {
         try {
-            const result = await signInWithPopup(auth, googleProvider);
+            const result = await signInWithRedirect(auth, googleProvider); 
             if (result) {
                 localStorage.setItem('user', result.user.displayName)
                 navigate('/')
