@@ -1,7 +1,6 @@
 import React from 'react';
 import { auth, googleProvider } from '../firebase';
 import { signInWithPopup } from 'firebase/auth';
-import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 const Login = () => {
     const navigate = useNavigate()
