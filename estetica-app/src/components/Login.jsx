@@ -1,20 +1,30 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { auth, googleProvider } from '../firebase';
-import { signInWithRedirect } from 'firebase/auth';
+import { signInWithRedirect, getRedirectResult } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 const Login = () => {
     const navigate = useNavigate()
+    useEffect(() => {
+        const checkRedirectResult = async () => {
+            const result = await getRedirectResult(auth);
+            if (result) {
+                // El usuario ha sido autenticado con éxito
+                localStorage.setItem('user', result.user.displayName);
+                navigate('/');
+            }
+        };
+        checkRedirectResult();
+    }, []);
+
     const login = async () => {
         try {
-            const result = await signInWithRedirect(auth, googleProvider); 
-            if (result) {
-                localStorage.setItem('user', result.user.displayName)
-                navigate('/')
-            }
+            await signInWithRedirect(auth, googleProvider);  // Usamos la redirección en lugar del popup
         } catch (err) {
             console.error(err);
         }
     };
+
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-pink-50">
