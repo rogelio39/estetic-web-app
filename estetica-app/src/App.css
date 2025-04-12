@@ -1,8 +1,0 @@
-body {
-  margin: 0;
-  height: 100vh;
-  background-image: url('src/assets/fondo.png'); /* Ruta de tu imagen */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}

@@ -16,11 +16,11 @@ const Navbar = () => {
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex h-16 items-center justify-between">
                     <div className="flex items-center">
-                        {/* <img
+                        <img
                             className="h-10 w-auto mr-3"
-                            src="/logo.png" // Cambiá esto por tu logo si tenés
+                            src="/logo-estetica.jpg"
                             alt="Estética Glam"
-                        /> */}
+                        />
                         <h1 className="text-pink-600 text-2xl font-semibold">Estética Glam</h1>
                     </div>
 
