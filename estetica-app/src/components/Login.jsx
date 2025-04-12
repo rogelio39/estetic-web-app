@@ -1,7 +1,7 @@
 import React from 'react';
-import { auth, googleProvider, signInWithPopup } from '../firebase';
+import { auth, googleProvider } from '../firebase';
+import { signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-
 
 
 const Login = () => {
