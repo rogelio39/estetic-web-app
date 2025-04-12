@@ -1,32 +1,22 @@
-import React, { useEffect } from 'react';
-import { auth, googleProvider } from '../firebase';
-import { signInWithRedirect, getRedirectResult } from 'firebase/auth';
+import React from 'react';
+import { auth, googleProvider, signInWithPopup } from '../firebase';
 import { useNavigate } from 'react-router-dom';
 
+
+
 const Login = () => {
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        const checkRedirectResult = async () => {
-            const result = await getRedirectResult(auth);
-            if (result) {
-                // El usuario ha sido autenticado con éxito
-                localStorage.setItem('user', result.user.displayName);
-                // Redirige al inicio después de un login exitoso
-                navigate('/');
-            }
-        };
-        checkRedirectResult();
-    }, [navigate]);
-
+    const navigate = useNavigate()
     const login = async () => {
         try {
-            // Inicia la autenticación con Google
-            await signInWithRedirect(auth, googleProvider);
+            const result = await signInWithPopup(auth, googleProvider);
+            if (result) {
+                navigate('/')
+            }
+            localStorage.setItem('user', result.user.displayName)
         } catch (err) {
             console.error(err);
         }
-    };
+    }
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-pink-50">
