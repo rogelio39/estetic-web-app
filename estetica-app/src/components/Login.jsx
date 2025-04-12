@@ -2,12 +2,14 @@ import React from 'react';
 import { auth, googleProvider } from '../firebase';
 import { signInWithPopup } from 'firebase/auth';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 const Login = () => {
+    const navigate = useNavigate()
     const login = async () => {
         try {
             const result = await signInWithPopup(auth, googleProvider);
             if (result) {
-                <Link to="/" className="hover:underline">Inicio</Link>
+                navigate('/')
             }
             localStorage.setItem('user', result.user.displayName)
         } catch (err) {

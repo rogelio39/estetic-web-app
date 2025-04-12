@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+const URL = import.meta.env.VITE_FIREBASE_BACKEND_URL
+
 const Turnos = () => {
     const [formData, setFormData] = useState({
         nombre: '',
@@ -18,7 +20,7 @@ const Turnos = () => {
 
         // Paso 1: Enviar los datos al backend para guardarlos
         try {
-            const response = await fetch('http://localhost:5000/api/turnos', {
+            const response = await fetch(`${URL}/api/turnos`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
