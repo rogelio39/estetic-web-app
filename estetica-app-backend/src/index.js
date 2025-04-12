@@ -3,7 +3,6 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import Turno from './models/Turno.js';
-import cors from 'cors'
 
 dotenv.config();
 
