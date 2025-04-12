@@ -3,11 +3,18 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import Turno from './models/Turno.js';
+import cors from 'cors'
 
 dotenv.config();
 
+const corsOptions = {
+    origin : 'https://estetic-web-app.onrender.com',
+    method: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}
+
 const app = express();
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 mongoose.connect(process.env.MONGODB_URI, {
