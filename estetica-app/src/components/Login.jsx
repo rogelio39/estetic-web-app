@@ -1,30 +1,27 @@
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { auth, googleProvider } from '../firebase';
-import { signInWithRedirect, getRedirectResult } from 'firebase/auth';
+import { signInWithRedirect } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+
 const Login = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+
+    // Verifica si el usuario ya está autenticado cuando se carga el componente
     useEffect(() => {
-        const checkRedirectResult = async () => {
-            const result = await getRedirectResult(auth);
-            if (result) {
-                // El usuario ha sido autenticado con éxito
-                localStorage.setItem('user', result.user.displayName);
-                navigate('/');
-            }
-        };
-        checkRedirectResult();
-    }, []);
+        if (auth.currentUser) {
+            // Si el usuario ya está autenticado, redirige automáticamente
+            navigate('/');
+        }
+    }, [navigate]);
 
     const login = async () => {
         try {
-            await signInWithRedirect(auth, googleProvider);  // Usamos la redirección en lugar del popup
+            // Inicia la autenticación con Google
+            await signInWithRedirect(auth, googleProvider);
         } catch (err) {
             console.error(err);
         }
     };
-
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-pink-50">
