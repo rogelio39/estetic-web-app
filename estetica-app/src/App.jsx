@@ -5,20 +5,25 @@ import Turnos from './pages/Turnos';
 import Login from './components/Login';
 import './App.css';
 import Navbar from './components/Navbar';
+import { AuthProvider } from './Context/AuthContext';
+import Tratamientos from "./pages/Tratamientos";
+import Carrito from "./components/Carrito";
 
 const App = () => {
 
 
   return (
     <Router>
-    
-
-      <Navbar/>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/turnos" element={<Turnos />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+      <AuthProvider>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/turnos" element={<Turnos />} />
+          <Route path="/login" element={<Login />} />
+          <Route path ="/tratamientos" element={<Tratamientos/>}/>
+          <Route path ="/carrito" element={<Carrito/>}/>
+        </Routes>
+      </AuthProvider>
     </Router>
   );
 };

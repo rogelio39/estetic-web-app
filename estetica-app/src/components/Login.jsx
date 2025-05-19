@@ -1,31 +1,38 @@
 import React from 'react';
-import { auth, googleProvider } from '../firebase';
-import { signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../Context/AuthContext';
 
 
 const Login = () => {
     const navigate = useNavigate()
-    const login = async () => {
-        try {
-            const result = await signInWithPopup(auth, googleProvider);
-            if (result) {
-                navigate('/')
-            }
-            localStorage.setItem('user', result.user.displayName)
-        } catch (err) {
-            console.error(err);
-        }
-    }
+    const { user, logout, login } = useAuth()
+
+
+
+    const handleLogin = async () => {
+        await login();
+        navigate('/');
+    };
+
+    const handleLogout = async () => {
+        await logout();
+        navigate('/login');
+    };
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-pink-50">
-            <button
-                onClick={login}
-                className="bg-red-500 text-white px-6 py-3 rounded hover:bg-red-600"
-            >
-                Iniciar sesión con Google
-            </button>
+            {
+                !user ?
+                    <button
+                        onClick={handleLogin}
+                        className="bg-red-500 text-white px-6 py-3 rounded hover:bg-red-600"
+                    >
+                        Iniciar sesión con Google
+                    </button> : <button onClick={handleLogout}
+                        className="bg-red-500 text-white px-6 py-3 rounded hover:bg-red-600">
+                        Desloguearme
+                    </button>
+            }
         </div>
     );
 };

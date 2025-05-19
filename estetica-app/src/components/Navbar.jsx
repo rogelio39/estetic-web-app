@@ -1,12 +1,13 @@
 import React from 'react'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../Context/AuthContext';
 
 import { FaWhatsapp, FaCalendarAlt, FaHome, FaSignInAlt } from 'react-icons/fa';
 const Navbar = () => {
+    const {user} = useAuth()
 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!mobileMenuOpen);
     };
@@ -17,11 +18,11 @@ const Navbar = () => {
                 <div className="flex h-16 items-center justify-between">
                     <div className="flex items-center">
                         <img
-                            className="h-10 w-auto mr-3"
+                            className="h-10 w-auto mr-3 rounded-3xl"
                             src="/logo-estetica.jpg"
                             alt="Estética Glam"
                         />
-                        <h1 className="text-pink-600 text-2xl font-semibold">Estética Glam</h1>
+                        <h1 className="text-pink-600 text-2xl font-semibold">STUDIO DI BELLEZA</h1>
                     </div>
 
                     <div className="sm:hidden">
@@ -52,9 +53,11 @@ const Navbar = () => {
                         <Link to="/turnos" className="text-gray-700 hover:text-pink-600 text-base font-medium flex items-center">
                             <FaCalendarAlt className="mr-1" /> Pedir Turno
                         </Link>
+
                         <Link to="/login" className="text-gray-700 hover:text-pink-600 text-base font-medium flex items-center">
-                            <FaSignInAlt className="mr-1" /> Login
+                            <FaSignInAlt className="mr-1" /> {!user ? 'login' : 'logout'} 
                         </Link>
+
                         <a
                             href="https://wa.me/3815455655"
                             target="_blank"
