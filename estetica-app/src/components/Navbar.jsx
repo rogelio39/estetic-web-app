@@ -3,12 +3,12 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../Context/AuthContext';
 import { FiShoppingCart } from "react-icons/fi";
-import {useCarrito} from '../Context/CarritoContext'
+import { useCarrito } from '../Context/CarritoContext'
 
 import { FaWhatsapp, FaCalendarAlt, FaHome, FaSignInAlt } from 'react-icons/fa';
 const Navbar = () => {
     const { user } = useAuth()
-    const {carrito} = useCarrito()
+    const { carrito } = useCarrito()
 
 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -28,6 +28,17 @@ const Navbar = () => {
                         />
                         <h1 className="text-pink-600 text-2xl font-semibold">STUDIO DI BELLEZA</h1>
                     </div>
+                    <Link
+                            to="/carrito"
+                            className="text-gray-700 hover:text-pink-600 text-base font-medium flex items-center"
+                        >
+                            <FiShoppingCart className="mr-1" /> carrito
+                            {carrito.length > 0 && (
+                                <span className="ml-1 bg-pink-600 text-white text-xs rounded-full px-2 py-0.5">
+                                    {carrito.length}
+                                </span>
+                            )}
+                        </Link>
 
                     <div className="sm:hidden">
                         <button
@@ -57,17 +68,6 @@ const Navbar = () => {
                         <Link to="/turnos" className="text-gray-700 hover:text-pink-600 text-base font-medium flex items-center">
                             <FaCalendarAlt className="mr-1" /> Pedir Turno
                         </Link>
-                        <Link
-                            to="/carrito"
-                            className="text-gray-700 hover:text-pink-600 text-base font-medium flex items-center"
-                        >
-                            <FiShoppingCart className="mr-1" /> carrito
-                            {carrito.length > 0 && (
-            <span className="ml-1 bg-pink-600 text-white text-xs rounded-full px-2 py-0.5">
-                {carrito.length}
-            </span>
-        )}
-                        </Link>
 
                         <Link to="/login" className="text-gray-700 hover:text-pink-600 text-base font-medium flex items-center">
                             <FaSignInAlt className="mr-1" /> {!user ? 'login' : 'logout'}
@@ -86,11 +86,14 @@ const Navbar = () => {
             </div>
 
             {mobileMenuOpen && (
-                <div className="sm:hidden px-4 pt-2 pb-3 space-y-1 bg-white shadow-md">
-                    <Link to="/" onClick={() => setMobileMenuOpen(false)} className="block text-gray-800 py-2">Inicio</Link>
-                    <Link to="/turnos" onClick={() => setMobileMenuOpen(false)} className="block text-gray-800 py-2">Pedir Turno</Link>
-                    <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="block text-gray-800 py-2">Login</Link>
-                    <a href="https://wa.me/3815455655" target="_blank" rel="noreferrer" className="block text-gray-800 py-2">WhatsApp</a>
+                <div>
+                    <div className="sm:hidden px-4 pt-2 pb-3 space-y-1 bg-white shadow-md">
+                        <Link to="/" onClick={() => setMobileMenuOpen(false)} className="block text-gray-800 py-2">Inicio</Link>
+                        <Link to="/turnos" onClick={() => setMobileMenuOpen(false)} className="block text-gray-800 py-2">Pedir Turno</Link>
+                        <Link to="/login" onClick={() => setMobileMenuOpen(false)} className="block text-gray-800 py-2">Login</Link>
+                        <a href="https://wa.me/3815455655" target="_blank" rel="noreferrer" className="block text-gray-800 py-2">WhatsApp</a>
+                    </div>
+
                 </div>
             )}
         </nav>
