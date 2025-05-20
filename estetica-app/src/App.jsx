@@ -7,7 +7,7 @@ import './App.css';
 import Navbar from './components/Navbar';
 import { AuthProvider } from './Context/AuthContext';
 import { CarritoProvider } from './Context/CarritoContext';
-import Tratamientos from './pages/Tratamientos.Jsx';
+import Tratamientos from './pages/Tratamientos.jsx';
 import Carrito from "./components/Carrito";
 
 const App = () => {
