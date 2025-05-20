@@ -1,3 +1,4 @@
+import React from 'react'
 import { useCarrito } from "../Context/CarritoContext";
 
 export default function Carrito() {

@@ -32,7 +32,8 @@ const tratamientos = [
 
 const Tratamientos = () => {
 
-    const { agregarAlCarrito } = useCarrito();
+
+    const { agregarAlCarrito} = useCarrito();
     return (
         <div className="p-6 grid gap-6">
             {tratamientos.map((categoria, idx) => (

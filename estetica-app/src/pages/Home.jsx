@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 import { FaWhatsapp, FaCalendarAlt, FaHome, FaHandSparkles  } from 'react-icons/fa';
-import { FiShoppingCart } from "react-icons/fi";
+
 import { useAuth } from "../Context/AuthContext";
 
 
@@ -57,12 +57,6 @@ const Home = () => {
                     className="block w-full text-lg font-medium text-gray-800 bg-[#e6dcc6] px-6 py-3 rounded-xl shadow-md hover:scale-105 hover:bg-[#d9ccb3] transition transform duration-200"
                 >
                     <FaHandSparkles  className="mr-1" /> Tratamientos
-                </Link>
-                <Link
-                    to="/carrito"
-                    className="block w-full text-lg font-medium text-gray-800 bg-[#e6dcc6] px-6 py-3 rounded-xl shadow-md hover:scale-105 hover:bg-[#d9ccb3] transition transform duration-200"
-                >
-                    <FiShoppingCart  className="mr-1" /> Tratamientos
                 </Link>
             </div>
 

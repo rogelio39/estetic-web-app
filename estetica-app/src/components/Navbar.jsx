@@ -2,10 +2,14 @@ import React from 'react'
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../Context/AuthContext';
+import { FiShoppingCart } from "react-icons/fi";
+import {useCarrito} from '../Context/CarritoContext'
 
 import { FaWhatsapp, FaCalendarAlt, FaHome, FaSignInAlt } from 'react-icons/fa';
 const Navbar = () => {
-    const {user} = useAuth()
+    const { user } = useAuth()
+    const {carrito} = useCarrito()
+
 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const toggleMobileMenu = () => {
@@ -53,9 +57,20 @@ const Navbar = () => {
                         <Link to="/turnos" className="text-gray-700 hover:text-pink-600 text-base font-medium flex items-center">
                             <FaCalendarAlt className="mr-1" /> Pedir Turno
                         </Link>
+                        <Link
+                            to="/carrito"
+                            className="text-gray-700 hover:text-pink-600 text-base font-medium flex items-center"
+                        >
+                            <FiShoppingCart className="mr-1" /> carrito
+                            {carrito.length > 0 && (
+            <span className="ml-1 bg-pink-600 text-white text-xs rounded-full px-2 py-0.5">
+                {carrito.length}
+            </span>
+        )}
+                        </Link>
 
                         <Link to="/login" className="text-gray-700 hover:text-pink-600 text-base font-medium flex items-center">
-                            <FaSignInAlt className="mr-1" /> {!user ? 'login' : 'logout'} 
+                            <FaSignInAlt className="mr-1" /> {!user ? 'login' : 'logout'}
                         </Link>
 
                         <a

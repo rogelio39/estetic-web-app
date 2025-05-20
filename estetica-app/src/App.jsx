@@ -6,7 +6,8 @@ import Login from './components/Login';
 import './App.css';
 import Navbar from './components/Navbar';
 import { AuthProvider } from './Context/AuthContext';
-import Tratamientos from "./pages/Tratamientos";
+import { CarritoProvider } from './Context/CarritoContext';
+import Tratamientos from './pages/Tratamientos.Jsx';
 import Carrito from "./components/Carrito";
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
 
   return (
     <Router>
+      <CarritoProvider>
       <AuthProvider>
         <Navbar />
         <Routes>
@@ -24,6 +26,7 @@ const App = () => {
           <Route path ="/carrito" element={<Carrito/>}/>
         </Routes>
       </AuthProvider>
+      </CarritoProvider>
     </Router>
   );
 };
